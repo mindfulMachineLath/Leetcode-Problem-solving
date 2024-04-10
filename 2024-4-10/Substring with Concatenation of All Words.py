@@ -7,7 +7,6 @@ class Solution:
         word_counts = defaultdict(int)
         for word in words:
             word_counts[word] += 1
-
         for offset in range(length):
             size = 0
             seen = defaultdict(int)
