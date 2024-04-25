@@ -1,25 +1,14 @@
-/**
- * @param {string} s
- * @param {number} k
- * @return {number}
- */
-var longestIdealString = function(s, k) {
-    const dp = new Array(150).fill(0);
+class Solution:
+    def longestIdealString(self, s: str, k: int) -> int:
+        dp = [0] * 150
+        max_len = 1
 
-    for(let c of s) {
-        for(let i = c.charCodeAt(0) - k; i <= c.charCodeAt(0) + k; i++) {
-            if(i >= 'a'.charCodeAt(0) && i <= 'z'.charCodeAt(0)) {
-                dp[c.charCodeAt(0)] = Math.max(dp[c.charCodeAt(0)], dp[i]);
-            }
-        }
+        for c in s:
+            for i in range(ord(c) - k, ord(c) + k + 1):
+                if ord('a') <= i <= ord('z'):
+                    dp[ord(c)] = max(dp[ord(c)], dp[i])
 
-        dp[c.charCodeAt(0)]++;
-    }
+            dp[ord(c)] += 1
+            max_len = max(max_len, dp[ord(c)])
 
-    let maxLen = 0;
-    for(let i = 0; i < 150; i++) {
-        maxLen = Math.max(maxLen, dp[i]);
-    }
-
-    return maxLen;
-};
+        return max_len
